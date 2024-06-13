@@ -4,7 +4,7 @@ import 'dart:ui';
 import 'package:mobile_scanner/src/objects/barcode.dart';
 
 /// This class represents a scanned barcode.
-class BarcodeCapture {
+final class BarcodeCapture {
   /// Create a new [BarcodeCapture] instance.
   const BarcodeCapture({
     this.barcodes = const <Barcode>[],

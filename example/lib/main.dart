@@ -4,8 +4,6 @@ import 'package:mobile_scanner_example/barcode_scanner_listview.dart';
 import 'package:mobile_scanner_example/barcode_scanner_pageview.dart';
 import 'package:mobile_scanner_example/barcode_scanner_returning_image.dart';
 import 'package:mobile_scanner_example/barcode_scanner_simple.dart';
-import 'package:mobile_scanner_example/barcode_scanner_window.dart';
-import 'package:mobile_scanner_example/barcode_scanner_zoom.dart';
 import 'package:mobile_scanner_example/mobile_scanner_overlay.dart';
 
 void main() {
@@ -17,7 +15,7 @@ void main() {
   );
 }
 
-class MyHome extends StatelessWidget {
+final class MyHome extends StatelessWidget {
   const MyHome({super.key});
 
   @override
@@ -28,91 +26,70 @@ class MyHome extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
-            ElevatedButton(
-              onPressed: () {
-                Navigator.of(context).push(
-                  MaterialPageRoute(
-                    builder: (context) => const BarcodeScannerSimple(),
-                  ),
-                );
-              },
-              child: const Text('MobileScanner Simple'),
+            const CustomElevatedButton(
+              text: 'MobileScanner Simple',
+              view: BarcodeScannerSimple(),
             ),
-            ElevatedButton(
-              onPressed: () {
-                Navigator.of(context).push(
-                  MaterialPageRoute(
-                    builder: (context) => const BarcodeScannerListView(),
-                  ),
-                );
-              },
-              child: const Text('MobileScanner with ListView'),
+            const CustomElevatedButton(
+              text: 'MobileScanner with ListView',
+              view: BarcodeScannerListView(),
             ),
-            ElevatedButton(
-              onPressed: () {
-                Navigator.of(context).push(
-                  MaterialPageRoute(
-                    builder: (context) => const BarcodeScannerWithController(),
-                  ),
-                );
-              },
-              child: const Text('MobileScanner with Controller'),
+            const CustomElevatedButton(
+              text: 'MobileScanner with Controller',
+              view: BarcodeScannerWithController(),
             ),
-            ElevatedButton(
-              onPressed: () {
-                Navigator.of(context).push(
-                  MaterialPageRoute(
-                    builder: (context) => const BarcodeScannerWithScanWindow(),
-                  ),
-                );
-              },
-              child: const Text('MobileScanner with ScanWindow'),
+
+            const CustomElevatedButton(
+              text: 'MobileScanner with ScanWindow',
+              view: BarcodeScannerReturningImage(),
             ),
-            ElevatedButton(
-              onPressed: () {
-                Navigator.of(context).push(
-                  MaterialPageRoute(
-                    builder: (context) => const BarcodeScannerReturningImage(),
-                  ),
-                );
-              },
-              child: const Text(
-                'MobileScanner with Controller (returning image)',
-              ),
+
+            const CustomElevatedButton(
+              text: 'MobileScanner with Controller (returning image)',
+              view: BarcodeScannerReturningImage(),
             ),
-            ElevatedButton(
-              onPressed: () {
-                Navigator.of(context).push(
-                  MaterialPageRoute(
-                    builder: (context) => const BarcodeScannerWithZoom(),
-                  ),
-                );
-              },
-              child: const Text('MobileScanner with zoom slider'),
+
+            const CustomElevatedButton(
+              text: 'MobileScanner with zoom slider',
+              view: BarcodeScannerPageView(),
             ),
-            ElevatedButton(
-              onPressed: () {
-                Navigator.of(context).push(
-                  MaterialPageRoute(
-                    builder: (context) => const BarcodeScannerPageView(),
-                  ),
-                );
-              },
-              child: const Text('MobileScanner pageView'),
+
+            const CustomElevatedButton(
+              text: 'MobileScanner pageView',
+              view: BarcodeScannerPageView(),
             ),
-            ElevatedButton(
-              onPressed: () {
-                Navigator.of(context).push(
-                  MaterialPageRoute(
-                    builder: (context) => BarcodeScannerWithOverlay(),
-                  ),
-                );
-              },
-              child: const Text('MobileScanner with Overlay'),
+
+            CustomElevatedButton(
+              text: 'MobileScanner with Overlay',
+              view: BarcodeScannerWithOverlay(),
             ),
+
+            ////////////////////////
           ],
         ),
       ),
+    );
+  }
+}
+
+final class CustomElevatedButton extends StatelessWidget {
+  final String text;
+  final Widget view;
+  const CustomElevatedButton({super.key, required this.text, required this.view});
+
+  @override
+  Widget build(BuildContext context) {
+    return ElevatedButton(
+      onPressed: () {
+        Navigator.of(context).push(
+          MaterialPageRoute(
+            builder: (context) {
+              return view;
+            },
+          ),
+        );
+      },
+      child: Text(text),
     );
   }
 }
